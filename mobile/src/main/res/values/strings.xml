@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">HRMaps</string>
+    <string name="start_navi">Start Navigation</string>
+    <string name="stop_navi">Stop Navigation</string>
+    <string name="get_location">Get Location</string>
+    <string name="NormalMode">NORMAL</string>
+    <string name="HybridMode">HYBRID</string>
+    <string name="TerrainMode">TERRAIN</string>
+    <string name="Nothing">NOTHING</string>
+    <string name="Stop">STOP_ACCESSES</string>
+    <string name="Everything">EVERYTHING</string>
+    <string name="Flow">FLOW</string>
+    <string name="Incident">INCIDENT</string>
+    <string name="Coverage">COVERAGE</string>
+</resources>

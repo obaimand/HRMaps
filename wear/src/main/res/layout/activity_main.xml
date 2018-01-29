@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context="heremapsexapmles.hrmaps.MainActivity"
+    tools:deviceIds="wear">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        app:boxedEdges="all">
+
+        <TextView
+            android:id="@+id/heartRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="--"
+            android:textColor="@color/red"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/bpmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bpm"
+            android:textColor="@color/white"
+            android:layout_below="@id/heartRateText"
+            android:layout_marginLeft="4dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="15dp"/>
+
+
+        <ImageButton
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_arrow_white_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/bpmText"
+            android:layout_marginTop="5dp" />
+
+        <ImageButton
+            android:id="@+id/btnPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pause_white_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/bpmText"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/heartImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/heartRateText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_launcher" />
+
+    </RelativeLayout>
+</android.support.wear.widget.BoxInsetLayout>
+
