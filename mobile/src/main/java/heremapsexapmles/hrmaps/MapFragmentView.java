@@ -7,6 +7,7 @@ package heremapsexapmles.hrmaps;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -456,7 +457,15 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
         /* Register a PositionListener to monitor the position updates */
         m_navigationManager.addPositionListener(
                 new WeakReference<NavigationManager.PositionListener>(m_positionListener));
+
+
+        m_navigationManager.addManeuverEventListener(new WeakReference<NavigationManager.ManeuverEventListener>(m_maneuverListener));
+          //      new WeakReference<NavigationManager.PositionListener>(m_maneuverListener));
+
+
     }
+
+
 
     private NavigationManager.PositionListener m_positionListener = new NavigationManager.PositionListener() {
         @Override
@@ -499,7 +508,20 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
                     Toast.LENGTH_SHORT).show();
         }
 
+
     };
+
+    private NavigationManager.ManeuverEventListener m_maneuverListener = new NavigationManager.ManeuverEventListener (){
+        @Override
+        public void onManeuverEvent() {
+            Toast.makeText(m_activity, "MANEUVERRRRR",Toast.LENGTH_SHORT).show();
+
+            Log.d("Test ", "maneuver.....");
+        }
+
+
+    };
+
 
     private  NavigationManager.RerouteListener m_RouteListener = new NavigationManager.RerouteListener() {
         @Override
