@@ -205,7 +205,14 @@
             android:gravity="center"
             android:src="@mipmap/settings" />
 
-
+        <Button
+            android:id="@+id/detailbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_margin="20dp"
+            android:text="View Details"
+            android:onClick="fetchDetails" />
 
 
     </FrameLayout>

@@ -6,12 +6,15 @@ package heremapsexapmles.hrmaps;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.here.android.mpa.common.Image;
 import com.here.android.mpa.common.LocationDataSourceHERE;
 import com.here.android.mpa.common.OnEngineInitListener;
 import com.here.android.mpa.common.PositioningManager;
+import com.here.android.mpa.common.RoadElement;
 import com.here.android.mpa.guidance.NavigationManager;
 import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapFragment;
@@ -29,6 +33,7 @@ import com.here.android.mpa.mapping.MapMarker;
 import com.here.android.mpa.mapping.MapObject;
 import com.here.android.mpa.mapping.MapRoute;
 import com.here.android.mpa.routing.CoreRouter;
+import com.here.android.mpa.routing.Maneuver;
 import com.here.android.mpa.routing.Route;
 import com.here.android.mpa.routing.RouteOptions;
 import com.here.android.mpa.routing.RoutePlan;
@@ -40,7 +45,9 @@ import com.here.sdk.analytics.internal.LocationRequest;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
         /* This class encapsulates the properties and functionality of the Map view.It also triggers a
@@ -64,6 +71,8 @@ public class MapFragmentView {
     private ImageButton m_settingsBtn;
     private SettingsPanel m_settingsPanel;
     private LinearLayout m_settingsLayout;
+    private Button m_Button;
+
 
     private List<MapObject> m_mapObjectList = new ArrayList<>();
     // HERE location data source instance
@@ -92,9 +101,19 @@ public class MapFragmentView {
         initGetLocationButton();
         initNaviControlButton();
         initSettingsPanel();
+        m_Button = (Button) m_activity.findViewById(R.id.detailbutton);
+        m_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(m_activity, "Button Pressed", Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent( m_activity ,   TripDetails.class ) ;
+             m_activity.startActivity(intent);
+            }
+        });
     }
 
+    Context context;
 
     private void initMapFragment() {
         /* Locate the mapFragment UI element */
@@ -355,6 +374,7 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
     private void initNaviControlButton() {
         m_naviControlButton = (Button) m_activity.findViewById(R.id.naviCtrlButton);
         m_naviControlButton.setText(R.string.start_navi);
+
         m_naviControlButton.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -516,6 +536,23 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
         public void onManeuverEvent() {
             Toast.makeText(m_activity, "MANEUVERRRRR",Toast.LENGTH_SHORT).show();
 
+
+            RoadElement roadElement  =  PositioningManager.getInstance().getRoadElement();
+
+
+
+
+            HRDbAdapter hrDbAdapter= new HRDbAdapter(  m_activity );
+            hrDbAdapter.open();
+            DataHolder dataHolder= new DataHolder(roadElement.getRoadName(), roadElement.getNumberOfLanes()+"", DateFormat.getDateTimeInstance().format(new Date()) );
+            long id=hrDbAdapter.InsertinDatabase(dataHolder);
+
+            if(id!=-1){
+                Toast.makeText(m_activity, "Inserted data => "+ id , Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(m_activity, "Unable to Insert data => "+ id , Toast.LENGTH_SHORT).show();
+            }
+
             Log.d("Test ", "maneuver.....");
         }
 
@@ -577,6 +614,16 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
             m_mapFragmentView.resumeNlp();
         }
     }*/
+
+   public void fetchDetails(View view){
+
+       Intent intent= new Intent( m_activity, ListViewAdapter.class);
+      //  Toast.makeText(m_activity,"Button Pressed", Toast.LENGTH_SHORT).show();
+    //    context.startActivity(intent);
+
+
+
+   }
 
 
     public void onDestroy() {
