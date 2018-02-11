@@ -351,7 +351,7 @@ PositioningManager.getInstance().addListener( new WeakReference<OnPositionChange
                 });
 
     }
-
+    //test
     private void initGetLocationButton(){
         m_GetLocationButton =(Button) m_activity.findViewById(R.id.getLocationButton);
         m_GetLocationButton.setText(R.string.get_location);
